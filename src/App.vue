@@ -9,3 +9,48 @@ export default {
   name: 'App'
 }
 </script>
+
+<style lang="scss">
+  #app{
+    font-size: 25px;
+    .distpicker-address-wrapper{
+      width: 315px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      select:nth-of-type(1){
+        min-width: 150px;
+      }
+      select:nth-of-type(2){
+        min-width: 150px;
+      }
+    }
+    .filter-container{
+      .el-button--primary{
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 0;
+      }
+    }
+  }
+
+  .filter-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .filter-item{
+      width: 200px;
+    }
+    .left-box{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+  .el-table{
+    font-size: 16px;
+  }
+
+</style>

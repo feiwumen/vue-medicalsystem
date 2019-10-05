@@ -1,10 +1,12 @@
 <template>
   <div class="app-container">
-    <div class="filter-container" style="display: flex;">
-      <el-input v-model="listQuery.name" placeholder="机构名称" style="width: 200px;" class="filter-item" />
-      <v-distpicker style="margin-left: 10px;" :hide-area="true" @province="onChangeProvince" @city="onChangeCity"></v-distpicker>
-      <el-button style="margin-left: 10px;" v-waves class="filter-item" type="primary" icon="el-icon-search" @click="getList">查询</el-button>
-      <el-button style="margin-left: 10px;" class="filter-item" type="primary" icon="el-icon-edit" @click="addDialogVisible = true">添加机构</el-button>
+    <div class="filter-container" >
+      <div class="left-box">
+        <el-input v-model="listQuery.name" placeholder="机构名称" class="filter-item" />
+        <v-distpicker style="margin-left: 10px;" :hide-area="true" @province="onChangeProvince" @city="onChangeCity"></v-distpicker>
+        <el-button style="margin-left: 10px;" v-waves class="filter-item" type="primary" icon="el-icon-search" @click="getList">查询</el-button>
+      </div>
+      <el-button  class="filter-item" type="primary" icon="el-icon-edit" @click="addDialogVisible = true">添加机构</el-button>
     </div>
 
     <el-table
@@ -75,7 +77,7 @@
 
     <div style="text-align: left">
       <el-dialog
-        :title="updateTitle"
+        title="更新"
         :visible.sync="updateDialogVisible"
         width="50%">
         <el-input v-model="updateInfo.name" size="mini" placeholder="请输入新的机构名称"></el-input>
@@ -91,7 +93,7 @@
 
     <div style="text-align: left">
       <el-dialog
-        :title="addTitle"
+        title="添加"
         :visible.sync="addDialogVisible"
         width="50%">
         <el-input v-model="addInfo.name" size="mini" placeholder="请输入新的机构名称"></el-input>
@@ -121,9 +123,6 @@
 
     data() {
       return {
-        updateTitle:'编辑',
-        addTitle:'添加',
-
         // 查询条件
         listQuery: {
           name: undefined,
@@ -343,7 +342,7 @@
             _this.getList();
           }
         })
-      },
+      }
     }
   }
 </script>
