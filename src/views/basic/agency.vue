@@ -79,14 +79,30 @@
       <el-dialog
         title="更新"
         :visible.sync="updateDialogVisible"
-        width="50%">
-        <el-input v-model="updateInfo.name" size="mini" placeholder="请输入新的机构名称"></el-input>
-        <el-input v-model="updateInfo.type" size="mini" placeholder="请输入新的机构类型" style="margin-top: 20px"></el-input>
-        <el-input v-model="updateInfo.address" size="mini" placeholder="请输入新的机构地址" style="margin-top: 20px"></el-input>
-        <v-distpicker :hide-area="true" @province="onUpdateChangeProvince" @city="onUpdateChangeCity" :province="updateInfo.province" :city="updateInfo.city"></v-distpicker>
+        width="30%">
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">机构名称：</p>
+          <el-input v-model="updateInfo.name" placeholder="请输入新的机构名称" style="flex: 1"></el-input>
+        </div>
+
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">机构类型：</p>
+          <el-input v-model="updateInfo.type" placeholder="请输入新的机构类型" style="flex: 1"></el-input>
+        </div>
+
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">机构地址：</p>
+          <el-input v-model="updateInfo.address" placeholder="请输入新的机构地址" style="flex: 1"></el-input>
+        </div>
+
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">省市：</p>
+          <v-distpicker :hide-area="true" @province="onUpdateChangeProvince" @city="onUpdateChangeCity" :province="updateInfo.province" :city="updateInfo.city" />
+        </div>
+
         <span slot="footer" class="dialog-footer">
-          <el-button size="mini" @click="updateDialogVisible = false">取 消</el-button>
-          <el-button type="primary" size="mini" @click="updatePosNameExec">确 定</el-button>
+          <el-button @click="updateDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="updatePosNameExec">确 定</el-button>
         </span>
       </el-dialog>
     </div>
@@ -95,14 +111,31 @@
       <el-dialog
         title="添加"
         :visible.sync="addDialogVisible"
-        width="50%">
-        <el-input v-model="addInfo.name" size="mini" placeholder="请输入新的机构名称"></el-input>
-        <el-input v-model="addInfo.type" size="mini" placeholder="请输入新的机构类型" style="margin-top: 20px"></el-input>
-        <el-input v-model="addInfo.address" size="mini" placeholder="请输入新的机构地址" style="margin-top: 20px"></el-input>
-        <v-distpicker :hide-area="true" @province="onAddChangeProvince" @city="onAddChangeCity" :province="addInfo.province" :city="addInfo.city"></v-distpicker>
+        width="30%">
+
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">机构名称：</p>
+          <el-input v-model="addInfo.name" placeholder="请输入新的机构名称" style="flex: 1"></el-input>
+        </div>
+
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">机构类型：</p>
+          <el-input v-model="addInfo.type" placeholder="请输入新的机构类型" style="flex: 1"></el-input>
+        </div>
+
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">机构地址：</p>
+          <el-input v-model="addInfo.address" placeholder="请输入新的机构地址" style="flex: 1"></el-input>
+        </div>
+
+        <div class="input-div">
+          <p style="width: 100px; text-align: right">省市：</p>
+          <v-distpicker :hide-area="true" @province="onAddChangeProvince" @city="onAddChangeCity" :province="addInfo.province" :city="addInfo.city" />
+        </div>
+
         <span slot="footer" class="dialog-footer">
-          <el-button size="mini" @click="addDialogVisible = false">取 消</el-button>
-          <el-button type="primary" size="mini" @click="addAgency">确 定</el-button>
+          <el-button @click="addDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addAgency">确 定</el-button>
         </span>
       </el-dialog>
     </div>
