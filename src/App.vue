@@ -14,7 +14,7 @@ export default {
   #app{
     font-size: 25px;
     .distpicker-address-wrapper{
-      width: 315px;
+      min-width: 315px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -23,6 +23,10 @@ export default {
         margin-right: 10px;
       }
       select:nth-of-type(2){
+        min-width: 150px;
+        margin-right: 10px;
+      }
+      select:nth-of-type(3){
         min-width: 150px;
       }
     }

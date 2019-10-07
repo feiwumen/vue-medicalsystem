@@ -4,7 +4,7 @@
       <div class="left-box">
         <el-input v-model="listQuery.name" placeholder="机构名称" class="filter-item" />
         <v-distpicker style="margin-left: 10px;" :hide-area="true" @province="onChangeProvince" @city="onChangeCity"></v-distpicker>
-        <el-button style="margin-left: 10px;" v-waves class="filter-item" type="primary" icon="el-icon-search" @click="getList">查询</el-button>
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="getList">查询</el-button>
       </div>
       <el-button  class="filter-item" type="primary" icon="el-icon-edit" @click="addDialogVisible = true">添加机构</el-button>
     </div>
@@ -97,7 +97,7 @@
 
         <div class="input-div">
           <p style="width: 100px; text-align: right">省市：</p>
-          <v-distpicker :hide-area="true" @province="onUpdateChangeProvince" @city="onUpdateChangeCity" :province="updateInfo.province" :city="updateInfo.city" />
+          <v-distpicker :hide-area="true" @province="onUpdateProvince" @city="onUpdateChangeCity" :province="updateInfo.province" :city="updateInfo.city" />
         </div>
 
         <span slot="footer" class="dialog-footer">
@@ -234,7 +234,7 @@
         }
       },
 
-      onUpdateChangeProvince(data){
+      onUpdateProvince(data){
         if (data.value == "省") {
           this.updateInfo.province = undefined
         } else {

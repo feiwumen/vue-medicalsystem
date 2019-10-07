@@ -34,7 +34,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="年龄" width="150px" align="center">
+      <el-table-column label="出生年月" width="150px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.birth }}</span>
         </template>
