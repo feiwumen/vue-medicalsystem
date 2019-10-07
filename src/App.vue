@@ -62,5 +62,7 @@ export default {
     align-items: center;
     margin-top: 10px;
   }
-
+  .tab-container {
+    margin: 15px;
+  }
 </style>

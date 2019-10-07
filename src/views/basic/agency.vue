@@ -102,7 +102,7 @@
 
         <span slot="footer" class="dialog-footer">
           <el-button @click="updateDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="updatePosNameExec">确 定</el-button>
+          <el-button type="primary" @click="updateAgency">确 定</el-button>
         </span>
       </el-dialog>
     </div>
@@ -110,6 +110,7 @@
     <div style="text-align: left">
       <el-dialog
         title="添加"
+        @close="emptyAddInfo"
         :visible.sync="addDialogVisible"
         width="30%">
 
@@ -130,7 +131,7 @@
 
         <div class="input-div">
           <p style="width: 100px; text-align: right">省市：</p>
-          <v-distpicker :hide-area="true" @province="onAddChangeProvince" @city="onAddChangeCity" :province="addInfo.province" :city="addInfo.city" />
+          <v-distpicker :hide-area="true" @province="onAddProvince" @city="onAddCity" :province="addInfo.province" :city="addInfo.city" />
         </div>
 
         <span slot="footer" class="dialog-footer">
@@ -218,14 +219,14 @@
         }
       },
 
-      onAddChangeProvince(data){
+      onAddProvince(data){
         if (data.value == "省") {
           this.addInfo.province = undefined
         } else {
           this.addInfo.province = data.value
         }
       },
-      onAddChangeCity(data){
+      onAddCity(data){
         if (data.value == "市") {
           this.addInfo.city = undefined
         } else {
@@ -270,14 +271,14 @@
           type: 'warning'
         }).then(() => {
           var _this = this;
-          _this.tableLoading = true;
+          _this.listLoading = true;
 
           let param = new URLSearchParams()
           param.append("agencyId", row.id)
           service.post("/manage/agency/delete", param)
             .then(resp => {
               console.log(resp)
-              _this.tableLoading = false;
+              _this.listLoading = false;
               if (resp && resp.code == 200) {
                 _this.getList();
               }
@@ -316,16 +317,20 @@
           console.log(resp)
 
           if (resp && resp.code == 200) {
-            _this.addInfo.name = '';
-            _this.addInfo.type = '';
-            _this.addInfo.address='';
-            _this.addInfo.province = ''
-            _this.addInfo.city = ''
-
             _this.listLoading = true;
             _this.getList();
           }
         });
+      },
+
+      emptyAddInfo(){
+        this.addInfo = {
+          name: '',
+          type: '',
+          address: '',
+          province: '',
+          city: '',
+        };
       },
 
       // 更新
@@ -340,7 +345,7 @@
         this.updateDialogVisible = true
       },
 
-      updatePosNameExec(){
+      updateAgency(){
         if (!isNotNullORBlank(this.updateInfo.name)) {
           this.$message.warning( '标题不能为空!');
           return;
