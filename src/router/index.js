@@ -43,7 +43,7 @@ export const constantRoutes = [
     hidden: true
   },
 
-  // 控制台
+  // 主页
   {
     path: '/',
     component: Layout,
@@ -51,8 +51,8 @@ export const constantRoutes = [
     children: [{
       path: 'index',
       name: 'index',
-      component: () => import('@/views/index'),
-      meta: { title: '控制台', icon: 'dashboard' }
+      component: () => import('@/views/basic/agency'),
+      meta: { title: '主页', icon: 'dashboard' }
     }]
   },
 

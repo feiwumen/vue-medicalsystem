@@ -111,7 +111,7 @@ export default {
           this.loading = true
           console.log('11')
           this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/dashboard' })
+            this.$router.push({ path: this.redirect || '/' })
             console.log('22')
             this.loading = false
             console.log('33')
