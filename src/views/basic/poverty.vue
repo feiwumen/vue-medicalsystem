@@ -1,5 +1,24 @@
 <template>
   <div class="app-container">
+    <div class="filter-container" >
+      <div class="left-box">
+        <el-input  placeholder="机构名称" class="filter-item" />
+
+        <el-select v-model="state" style="width: 130px;margin-right: 15px;" size="mini" placeholder="状态">
+          <el-option
+            v-for="item in status_optins"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id">
+          </el-option>
+        </el-select>
+
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-search">查询</el-button>
+      </div>
+      <el-button  class="filter-item" type="primary" icon="el-icon-edit">添加机构</el-button>
+    </div>
+
+
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -44,7 +63,8 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+// import { getList } from '@/api/table'
+import service from '@/utils/request'
 
 export default {
   filters: {
@@ -69,9 +89,11 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+
+
+      service.get("/manage/poverty/list", ).then(response => {
         this.list = response.data.items
-        this.listLoading = false
+        this.listLoading = false;
       })
     }
   }
