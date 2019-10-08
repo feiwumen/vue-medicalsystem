@@ -91,21 +91,20 @@
         :visible.sync="addDialogVisible"
         width="50%">
         <el-form :model="addInfo" :rules="rules" ref="addEmpForm">
-          <div style="text-align: left">
+          <div style="text-align: center">
             <el-row>
               <el-col :span="10">
                 <div>
                   <el-form-item label="真实姓名:" prop="name">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" style="width: 150px" placeholder="请输入真实姓名"></el-input>
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" placeholder="请输入真实姓名"></el-input>
                   </el-form-item>
                 </div>
               </el-col>
 
               <el-col :span="10">
                 <div>
-                  <el-form-item label="身份证号:" prop="identity">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.identity" style="width: 150px"
-                              placeholder="请输入身份证号"></el-input>
+                  <el-form-item label="身份证号:" prop="identity" >
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.identity" placeholder="请输入身份证号"></el-input>
                   </el-form-item>
                 </div>
               </el-col>
@@ -115,17 +114,15 @@
               <el-col :span="10">
                 <div>
                   <el-form-item label="手机号:" prop="phone" >
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.phone" style="width: 150px"
-                              placeholder="请输入手机号"></el-input>
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.phone" placeholder="请输入手机号"></el-input>
                   </el-form-item>
                 </div>
               </el-col>
 
               <el-col :span="10">
                 <div>
-                  <el-form-item label="密码:" prop="pwd">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.pwd" style="width: 150px"
-                              placeholder="请输入密码"></el-input>
+                  <el-form-item label="密码:" prop="pwd" >
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.pwd" placeholder="请输入密码"></el-input>
                   </el-form-item>
                 </div>
               </el-col>
@@ -134,8 +131,8 @@
             <el-row>
               <el-col :span="10">
                 <div>
-                  <el-form-item label="性别:" prop="sex">
-                    <el-select v-model="addInfo.sex" style="width: 130px" placeholder="性别">
+                  <el-form-item label="性别:" prop="sex"  >
+                    <el-select v-model="addInfo.sex" placeholder="性别">
                       <el-option
                         v-for="item in sex_options"
                         :key="item.id"
@@ -149,9 +146,8 @@
 
               <el-col :span="10">
                 <div>
-                  <el-form-item label="民族:" prop="nation">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.nation" style="width: 150px"
-                              placeholder="请输入民族"></el-input>
+                  <el-form-item label="民族:" prop="nation"  >
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.nation" placeholder="请输入民族"></el-input>
                   </el-form-item>
                 </div>
               </el-col>
@@ -161,7 +157,7 @@
 
               <el-col :span="10">
                 <div>
-                  <el-form-item label="出生日期:" prop="birth">
+                  <el-form-item label="出生日期:" prop="birth"  >
                     <el-date-picker
                       v-model="addInfo.birth"
                       value-format="yyyyMMdd"
@@ -174,8 +170,8 @@
 
               <el-col :span="10">
                 <div>
-                  <el-form-item label="老人类型:" prop="old_type">
-                    <el-select v-model="addInfo.oldType" style="width: 130px" placeholder="老人类型">
+                  <el-form-item label="老人类型:" prop="old_type"  >
+                    <el-select v-model="addInfo.oldType" placeholder="老人类型">
                       <el-option
                         v-for="item in old_type_options"
                         :key="item.id"
@@ -191,8 +187,8 @@
             <el-row>
               <el-col :span="10">
                 <div>
-                  <el-form-item label="婚姻状况:" prop="marital_status">
-                    <el-select v-model="addInfo.maritalStatus" style="width: 130px" placeholder="婚姻状况">
+                  <el-form-item label="婚姻状况:" prop="marital_status"  >
+                    <el-select v-model="addInfo.maritalStatus" placeholder="婚姻状况">
                       <el-option
                         v-for="item in marital_status_option"
                         :key="item.id"
@@ -206,8 +202,8 @@
 
               <el-col :span="10">
                 <div>
-                  <el-form-item label="居住情况:" prop="live_status">
-                    <el-select v-model="addInfo.liveStatus" style="width: 130px" placeholder="居住情况">
+                  <el-form-item label="居住情况:" prop="live_status"  >
+                    <el-select v-model="addInfo.liveStatus"  placeholder="居住情况">
                       <el-option
                         v-for="item in live_status_option"
                         :key="item.id"
@@ -221,16 +217,16 @@
             </el-row>
 
             <el-row>
-              <el-form-item label="家庭地址:" prop="address">
+              <el-form-item label="家庭地址:" prop="address"  >
                 <v-distpicker :hide-area="true" @province="onAddProvince" @city="onAddCity" :province="addInfo.province" :city="addInfo.city" />
               </el-form-item>
             </el-row>
 
             <el-row>
-              <el-col :span="10">
+              <el-col>
                 <div>
                   <el-form-item label="地址详情:" prop="address" >
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.address" style="width: 150px"
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.address" style="min-width: 500px"
                               placeholder="请输入地址详情"></el-input>
 
                   </el-form-item>
@@ -241,19 +237,16 @@
             <el-row>
               <el-col :span="10">
                 <div>
-                  <el-form-item label="所属社区:" prop="community">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.community" style="width: 150px"
+                  <el-form-item label="所属社区:" prop="community" >
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.community"
                               placeholder="请输入所属社区"></el-input>
                   </el-form-item>
                 </div>
               </el-col>
-            </el-row>
-
-            <el-row>
               <el-col :span="10">
                 <div>
                   <el-form-item label="居家养老:" prop="provide_state">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.provideState" style="width: 150px"
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.provideState"
                               placeholder="请输入居家养老"></el-input>
                   </el-form-item>
                 </div>
@@ -266,7 +259,6 @@
             </span>
           </div>
         </el-form>
-
       </el-dialog>
     </div>
 
@@ -347,6 +339,7 @@
             trigger: 'blur'
           }],
           phone: [{required: true, message: '必填:电话号码', trigger: 'blur'}],
+          pwd: [{required: true, message: '必填:密码', trigger: 'blur'}],
           address: [{required: true, message: '必填:联系地址', trigger: 'blur'}],
         },
       };

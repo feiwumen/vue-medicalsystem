@@ -69,7 +69,7 @@
               <el-col :span="10">
                 <div>
                   <el-form-item label="姓名:" prop="name">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" style="width: 150px" placeholder="请输入真实姓名"></el-input>
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" placeholder="请输入真实姓名"></el-input>
                   </el-form-item>
                 </div>
               </el-col>
@@ -80,7 +80,7 @@
               <el-col :span="10">
                 <div>
                   <el-form-item label="手机号:" prop="phone" >
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.phone" style="width: 150px"
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.phone"
                               placeholder="请输入手机号"></el-input>
                   </el-form-item>
                 </div>
@@ -89,7 +89,7 @@
               <el-col :span="10">
                 <div>
                   <el-form-item label="密码:" prop="pwd">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.pwd" style="width: 150px"
+                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.pwd"
                               placeholder="请输入密码"></el-input>
                   </el-form-item>
                 </div>
@@ -100,7 +100,7 @@
               <el-col :span="10">
                 <div>
                   <el-form-item label="性别:" prop="sex">
-                    <el-select v-model="addInfo.sex" style="width: 130px" placeholder="性别">
+                    <el-select v-model="addInfo.sex"  placeholder="性别">
                       <el-option
                         v-for="item in sex_options"
                         :key="item.id"
@@ -128,7 +128,7 @@
 
             <span slot="footer" class="dialog-footer">
               <el-button @click="addDialogVisible= false">取 消</el-button>
-              <el-button type="primary" @click="addElder">确 定</el-button>
+              <el-button type="primary" @click="addChild('addEmpForm')">确 定</el-button>
             </span>
 
           </div>
@@ -173,6 +173,7 @@
           phone:undefined,
           birth:undefined,
           sex:0,
+          pwd: undefined,
         },
 
         // 筛选框
@@ -183,6 +184,7 @@
           sex: [{required: true, message: '必填:性别', trigger: 'blur'}],
           birth: [{required: true, message: '必填:出生日期', trigger: 'blur'}],
           phone: [{required: true, message: '必填:电话号码', trigger: 'blur'}],
+          pwd: [{required: true, message: '必填:密码', trigger: 'blur'}],
         },
       };
     },
@@ -210,24 +212,30 @@
         // TODO 更新信息
       },
 
-      // 更新老人
-      updateElder(){
+      // 更新子女
+      updateChild(){
 
       },
 
-      // 添加老人
-      addElder(){
-        var _this = this;
-        _this.listLoading = true;
-
-        service.post("/manage/user/insert", (this.addInfo)).then(resp=> {
-          _this.listLoading = false;
-          _this.addDialogVisible=false;
-          console.log(resp)
-
-          if (resp && resp.code == 200) {
+      // 添加子女
+      addChild(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            var _this = this;
             _this.listLoading = true;
-            _this.getList();
+
+            service.post("/manage/user/insert", (this.addInfo)).then(resp=> {
+              _this.listLoading = false;
+              _this.addDialogVisible=false;
+              console.log(resp)
+
+              if (resp && resp.code == 200) {
+                _this.listLoading = true;
+                _this.getList();
+              }
+            });
+          } else {
+            return false;
           }
         });
       },
@@ -238,6 +246,7 @@
           phone:undefined,
           birth:undefined,
           sex:0,
+          pwd: undefined,
         };
       },
     },

@@ -66,6 +66,23 @@ export default {
     align-items: center;
     margin-top: 10px;
   }
+
+  .el-row{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .el-form-item {
+    display: flex;
+    justify-content: flex-start;
+    .el-form-item__label{
+      width: 100px;
+    }
+    .el-form-item__content{
+      width: 200px;
+    }
+  }
+
   .tab-container {
     margin: 15px;
   }
