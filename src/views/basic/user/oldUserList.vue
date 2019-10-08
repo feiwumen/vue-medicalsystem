@@ -262,7 +262,7 @@
 
             <span slot="footer" class="dialog-footer">
               <el-button @click="addDialogVisible= false">取 消</el-button>
-              <el-button type="primary" @click="addElder">确 定</el-button>
+              <el-button type="primary" @click="addElder('addEmpForm')">确 定</el-button>
             </span>
           </div>
         </el-form>
@@ -396,18 +396,24 @@
       },
 
       // 添加老人
-      addElder(){
-        var _this = this;
-        _this.listLoading = true;
-
-        service.post("/manage/user/insertElder", (this.addInfo)).then(resp=> {
-          _this.listLoading = false;
-          _this.addDialogVisible=false;
-          console.log(resp)
-
-          if (resp && resp.code == 200) {
+      addElder(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            var _this = this;
             _this.listLoading = true;
-            _this.getList();
+
+            service.post("/manage/user/insertElder", (this.addInfo)).then(resp=> {
+              _this.listLoading = false;
+              _this.addDialogVisible=false;
+              console.log(resp)
+
+              if (resp && resp.code == 200) {
+                _this.listLoading = true;
+                _this.getList();
+              }
+            });
+          } else {
+            return false;
           }
         });
       },

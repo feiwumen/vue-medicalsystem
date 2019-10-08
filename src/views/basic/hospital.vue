@@ -235,9 +235,9 @@
       },
       onChangeArea(data){
         if (data.value == "区") {
-          this.listQuery.area = undefined
+          this.listQuery.country = undefined
         } else {
-          this.listQuery.area = data.value
+          this.listQuery.country = data.value
         }
       },
 
@@ -257,9 +257,9 @@
       },
       onAddArea(data){
         if (data.value == "区") {
-          this.addInfo.area = undefined
+          this.addInfo.country = undefined
         } else {
-          this.addInfo.area = data.value
+          this.addInfo.country = data.value
         }
       },
 
@@ -279,9 +279,9 @@
       },
       onUpdateArea(data){
         if (data.value == "区") {
-          this.updateInfo.area = undefined
+          this.updateInfo.country = undefined
         } else {
-          this.updateInfo.area = data.value
+          this.updateInfo.country = data.value
         }
       },
 
