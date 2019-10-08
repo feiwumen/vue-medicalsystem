@@ -45,6 +45,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
     .filter-item{
       width: 200px;
     }

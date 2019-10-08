@@ -144,11 +144,10 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+
   .el-input {
     display: inline-block;
     height: 47px;
-    width: 85%;
-
     input {
       background: transparent;
       border: 0px;
@@ -158,7 +157,6 @@ $cursor: #fff;
       color: $light_gray;
       height: 47px;
       caret-color: $cursor;
-
       &:-webkit-autofill {
         box-shadow: 0 0 0px 1000px $bg inset !important;
         -webkit-text-fill-color: $cursor !important;
@@ -172,7 +170,21 @@ $cursor: #fff;
     border-radius: 5px;
     color: #454545;
   }
+  .el-form-item__content {
+    display: flex;
+    width: 100%;
+
+    .el-input {
+      width: 200px;
+    }
+
+    .el-input__inner {
+      flex: 1;
+    }
+  }
 }
+
+
 </style>
 
 <style lang="scss" scoped>
@@ -193,6 +205,7 @@ $light_gray:#eee;
     padding: 160px 35px 0;
     margin: 0 auto;
     overflow: hidden;
+
   }
 
   .tips {

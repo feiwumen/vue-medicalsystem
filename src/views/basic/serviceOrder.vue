@@ -25,7 +25,6 @@
       fit
       highlight-current-row
       style="margin-top: 10px;">
-      >
 
       <el-table-column label="序号" prop="id" sortable="custom" align="center" width="80">
         <template slot-scope="scope">
@@ -93,8 +92,9 @@
 <script>
 
 import service from '@/utils/request'
-
+import waves from '@/directive/waves'
 export default {
+  directives: { waves },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -127,7 +127,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      service.get("/manage/poverty/list", ).then(response => {
+      service.get("/manage/serviceOrder/list", ).then(response => {
         this.list = response.data.items
         this.listLoading = false;
       })

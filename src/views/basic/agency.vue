@@ -22,19 +22,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="机构名称" width="150px" align="center">
+      <el-table-column label="机构名称" width="120px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="机构类型" width="150px" align="center">
+      <el-table-column label="机构类型" width="120px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.type }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="机构地址"  align="center">
+      <el-table-column label="机构地址" width="120px"  align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.address }}</span>
         </template>
