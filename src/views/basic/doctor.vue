@@ -87,81 +87,154 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.pageSize" @pagination="getList" />
 
-    <div style="text-align: left">
-      <el-dialog
-        title="更新"
-        :visible.sync="updateDialogVisible"
-        @close="emptyUpdateInfo"
-        width="50%">
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">医生名称：</p>
-          <el-input v-model="updateInfo.name" placeholder="请输入新的医生名称" style="flex: 1"></el-input>
-        </div>
+    <el-dialog
+      title="更新医生"
+      @close="emptyUpdateInfo"
+      :visible.sync="updateDialogVisible"
+      width="50%">
+      <el-form :model="updateInfo" :rules="rules" ref="addEmpForm">
+        <el-row aria-colcount="2">
+          <el-col aria-colindex="0">
+            <el-form-item label="医生姓名:" prop="name">
+              <el-input prefix-icon="el-icon-edit" v-model="updateInfo.name" placeholder="请输入姓名" />
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="手机号:" prop="phone" >
+              <el-input prefix-icon="el-icon-edit" v-model="updateInfo.phone" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">医生类型：</p>
-          <el-input v-model="updateInfo.type" placeholder="请输入新的医生类型" style="flex: 1"></el-input>
-        </div>
+        <el-row>
+          <el-col>
+            <el-form-item label="医院名称:" prop="hospital" >
+              <el-input prefix-icon="el-icon-edit" v-model="updateInfo.hospital" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">医生地址：</p>
-          <el-input v-model="updateInfo.address" placeholder="请输入新的医生地址" style="flex: 1"></el-input>
-        </div>
+        <el-row aria-colcount="2">
+          <el-col aria-colindex="0">
+            <el-form-item label="一级科室:" prop="department">
+              <el-input prefix-icon="el-icon-edit" v-model="updateInfo.department" placeholder="请输入姓名" />
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="二级科室:" prop="secondDepartment" >
+              <el-input prefix-icon="el-icon-edit" v-model="updateInfo.secondDepartment" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">省市：</p>
-          <v-distpicker @province="onUpdateProvince" @city="onUpdateCity" @area="onUpdateArea" :province="updateInfo.province" :city="updateInfo.city" :area="updateInfo.country"/>
-        </div>
+        <el-row aria-colcount="2">
+          <el-col aria-colindex="0">
+            <el-form-item label="职务:" prop="jobTitle">
+              <el-input prefix-icon="el-icon-edit" v-model="updateInfo.jobTitle" placeholder="请输入姓名" />
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="擅长:" prop="skill" >
+              <el-input prefix-icon="el-icon-edit" v-model="updateInfo.skill" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">简介：</p>
-          <el-input v-model="updateInfo.introduction" placeholder="请输入新的医生简介" style="flex: 1"></el-input>
-        </div>
+        <el-row>
+          <el-col>
+            <el-form-item label="省市:">
+              <v-distpicker @province="onUpdateProvince" @city="onUpdateCity" @area="onUpdateArea" :province="updateInfo.province" :city="updateInfo.city" :area="updateInfo.country"/>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="updateDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="updateHospital">确 定</el-button>
-        </span>
-      </el-dialog>
-    </div>
+        <el-row>
+          <div style="margin: 0 auto">
+          <span slot="footer" class="dialog-footer">
+            <el-button  @click="addDialogVisible = false">取 消</el-button>
+            <el-button type="primary"  @click="updateItem('addEmpForm')">确 定</el-button>
+          </span>
+          </div>
+        </el-row>
+      </el-form>
+    </el-dialog>
 
-    <div style="text-align: left">
-      <el-dialog
-        title="添加"
-        @close="emptyAddInfo"
-        :visible.sync="addDialogVisible"
-        width="50%">
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">医生名称：</p>
-          <el-input v-model="addInfo.name" placeholder="请输入新的医生名称" style="flex: 1"></el-input>
-        </div>
+    <el-dialog
+      title="添加医生"
+      @close="emptyAddInfo"
+      :visible.sync="addDialogVisible"
+      width="50%">
+      <el-form :model="addInfo" :rules="rules" ref="addEmpForm">
+        <el-row aria-colcount="3">
+          <el-col aria-colindex="0">
+            <el-form-item label="医生姓名:" prop="name">
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" placeholder="请输入姓名" />
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="手机号:" prop="phone" >
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.phone" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="2">
+            <el-form-item label="密码:" prop="pwd" >
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.pwd" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">医生类型：</p>
-          <el-input v-model="addInfo.type" placeholder="请输入新的医生类型" style="flex: 1"></el-input>
-        </div>
+        <el-row>
+          <el-col>
+            <el-form-item label="医院名称:" prop="hospital" >
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.hospital" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">医生地址：</p>
-          <el-input v-model="addInfo.address" placeholder="请输入新的医生地址" style="flex: 1"></el-input>
-        </div>
+        <el-row aria-colcount="2">
+          <el-col aria-colindex="0">
+            <el-form-item label="一级科室:" prop="department">
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.department" placeholder="请输入姓名" />
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="二级科室:" prop="secondDepartment" >
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.secondDepartment" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">省市：</p>
-          <v-distpicker @province="onAddProvince" @city="onAddCity" @area="onAddArea" :province="addInfo.province" :city="addInfo.city" :area="addInfo.country"/>
-        </div>
+        <el-row aria-colcount="2">
+          <el-col aria-colindex="0">
+            <el-form-item label="职务:" prop="jobTitle">
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.jobTitle" placeholder="请输入姓名" />
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="擅长:" prop="skill" >
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.skill" placeholder="请输入身份证号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <div class="input-div">
-          <p style="width: 100px; text-align: right">简介：</p>
-          <el-input v-model="addInfo.introduction" placeholder="请输入新的医生简介" style="flex: 1"></el-input>
-        </div>
+        <el-row>
+          <el-col>
+            <el-form-item label="省市:">
+              <v-distpicker @province="onAddProvince" @city="onAddCity" @area="onAddArea" :province="addInfo.province" :city="addInfo.city" :area="addInfo.country"/>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="addDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addHospital">确 定</el-button>
-        </span>
-      </el-dialog>
-    </div>
+        <el-row>
+          <div style="margin: 0 auto">
+          <span slot="footer" class="dialog-footer">
+            <el-button  @click="addDialogVisible = false">取 消</el-button>
+            <el-button type="primary"  @click="addItem('addEmpForm')">确 定</el-button>
+          </span>
+          </div>
+        </el-row>
+      </el-form>
+    </el-dialog>
 
   </div>
 </template>
@@ -203,24 +276,31 @@
         // 添加医生
         addInfo: {
           name:undefined,
-          type:undefined,
-          introduction:undefined,
-          address:undefined,
-          province: '',
-          city: '',
-          country: '',
+          phone:undefined,
+          pwd:undefined,
+          hospital:undefined,
+          department: undefined,
+          secondDepartment: undefined,
+          jobTitle: undefined,
+          skill: undefined,
+          province: undefined,
+          city : undefined,
+          country: undefined,
         },
 
         // 更新医生
         updateInfo: {
-          id: undefined,
+          id:undefined,
           name:undefined,
-          type:undefined,
-          introduction:undefined,
-          address:undefined,
-          province: '',
-          city: '',
-          country: '',
+          phone:undefined,
+          hospital:undefined,
+          department: undefined,
+          secondDepartment: undefined,
+          jobTitle: undefined,
+          skill: undefined,
+          province: undefined,
+          city : undefined,
+          country: undefined,
         },
       }
     },
@@ -340,44 +420,40 @@
       },
 
       // 添加医生
-      addHospital(){
-        if (!isNotNullORBlank(this.addInfo.name)) {
-          this.$message.warning( '标题不能为空!');
-          return;
-        }
-        if (!isNotNullORBlank(this.addInfo.type)) {
-          this.$message.warning( '类型不能为空!');
-          return;
-        }
-        if (!isNotNullORBlank(this.addInfo.address)) {
-          this.$message.warning( '类型不能为空!');
-          return;
-        }
-
-        var _this = this;
-        _this.listLoading = true;
-
-        service.post("/manage/hospital/insert", this.addInfo).then(resp=> {
-          _this.listLoading = false;
-          _this.addDialogVisible=false;
-          console.log(resp)
-
-          if (resp && resp.code == 200) {
+      addItem(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            var _this = this;
             _this.listLoading = true;
-            _this.getList();
+
+            service.post("/manage/doctor/insert", this.addInfo).then(resp=> {
+              _this.listLoading = false;
+              _this.addDialogVisible=false;
+              console.log(resp)
+
+              if (resp && resp.code == 200) {
+                _this.listLoading = true;
+                _this.getList();
+              }
+            });
+          } else {
+            return false;
           }
         });
       },
-
       emptyAddInfo(){
         this.addInfo = {
           name:undefined,
-          type:undefined,
-          introduction:undefined,
-          address:undefined,
-          province: '',
-          city: '',
-          country: '',
+          phone:undefined,
+          pwd:undefined,
+          hospital:undefined,
+          department: undefined,
+          secondDepartment: undefined,
+          jobTitle: undefined,
+          skill: undefined,
+          province: undefined,
+          city : undefined,
+          country: undefined,
         };
       },
 
@@ -385,53 +461,53 @@
       handleUpdate(row) {
         this.updateInfo.id = row.id
         this.updateInfo.name = row.name
-        this.updateInfo.type = row.type
-        this.updateInfo.introduction = row.introduction
-        this.updateInfo.address=row.address
+        this.updateInfo.phone = row.phone
+        this.updateInfo.hospital = row.hospital
+        this.updateInfo.department = row.department
+        this.updateInfo.secondDepartment = row.secondDepartment
+        this.updateInfo.jobTitle = row.jobTitle
+        this.updateInfo.skill =  row.skill
         this.updateInfo.province = row.province
-        this.updateInfo.city = row.city
+        this.updateInfo.city  = row.city
+        this.updateInfo.country = row.country
 
         this.updateDialogVisible = true
       },
 
-      updateHospital(){
-        if (!isNotNullORBlank(this.updateInfo.name)) {
-          this.$message.warning( '标题不能为空!');
-          return;
-        }
-        if (!isNotNullORBlank(this.updateInfo.type)) {
-          this.$message.warning( '类型不能为空!');
-          return;
-        }
-        if (!isNotNullORBlank(this.updateInfo.address)) {
-          this.$message.warning( '类型不能为空!');
-          return;
-        }
+      updateItem(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.loading = true;
+            var _this = this;
 
-        this.loading = true;
-        var _this = this;
+            service.post("/manage/doctor/update", this.updateInfo).then(resp=> {
+              _this.updateDialogVisible = false;
+              _this.loading = false;
 
-        service.post("/manage/hospital/update", this.updateInfo).then(resp=> {
-          _this.updateDialogVisible = false;
-          _this.loading = false;
-
-          if (resp && resp.code == 200) {
-            _this.listLoading = true
-            _this.getList();
+              if (resp && resp.code == 200) {
+                _this.listLoading = true
+                _this.getList();
+              }
+            })
+          } else {
+            return false;
           }
-        })
-      },
+        });
 
+      },
       emptyUpdateInfo(){
-        this.addInfo = {
-          id: undefined,
+        this.updateInfo = {
+          id:undefined,
           name:undefined,
-          type:undefined,
-          introduction:undefined,
-          address:undefined,
-          province: '',
-          city: '',
-          country: '',
+          phone:undefined,
+          hospital:undefined,
+          department: undefined,
+          secondDepartment: undefined,
+          jobTitle: undefined,
+          skill: undefined,
+          province: undefined,
+          city : undefined,
+          country: undefined,
         };
       },
     }

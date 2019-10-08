@@ -92,8 +92,8 @@
       <el-form :model="addInfo" :rules="rules" ref="addEmpForm">
         <el-row aria-colcount="2">
           <el-col aria-colindex="0">
-            <el-form-item label="真实姓名:" prop="name">
-              <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" placeholder="请输入真实姓名" />
+            <el-form-item label="姓名:" prop="name">
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" placeholder="请输入姓名" />
             </el-form-item>
           </el-col>
           <el-col aria-colindex="1">

@@ -1,79 +1,44 @@
 <template>
-  <div class="app-container">
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-    >
-      <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Title">
-        <template slot-scope="scope">
-          {{ scope.row.title }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.pageviews }}
-        </template>
-      </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
-        </template>
-      </el-table-column>
-    </el-table>
+  <div class="tab-container">
+    <el-tabs v-model="defaultTab" style="margin-top:15px;" type="border-card">
+      <el-tab-pane label="预约挂号" name="reserveList">
+        <reserve_List state="reserveList"/>
+      </el-tab-pane>
+
+      <el-tab-pane label="咨询管理" name="consultList">
+        <consult_List state="consultList"/>
+      </el-tab-pane>
+
+      <el-tab-pane label="回访管理" name="revisitList">
+        <revisit_List state="revisitList"/>
+      </el-tab-pane>
+
+      <el-tab-pane label="处方管理" name="prescriptionList">
+        <prescription_List state="prescriptionList"/>
+      </el-tab-pane>
+
+    </el-tabs>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+  import consultList from './medical/consultList.vue'
+  import prescriptionList from './medical/prescriptionList.vue'
+  import revisitList from './medical/revisitList.vue'
+  import reserveList from './medical/reserveList.vue'
 
-export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
+  export default {
+    data() {
+      return {
+        defaultTab: 'reserveList'
+      };
+    },
+    methods: {},
+    components: {
+      'consult_List': consultList,
+      'prescription_List': prescriptionList,
+      'revisit_List': revisitList,
+      'reserve_List': reserveList
     }
-  },
-  data() {
-    return {
-      list: null,
-      listLoading: true
-    }
-  },
-  created() {
-    this.fetchData()
-  },
-  methods: {
-    fetchData() {
-      this.listLoading = true
-      getList().then(response => {
-        this.list = response.data.items
-        this.listLoading = false
-      })
-    }
-  }
-}
+  };
 </script>

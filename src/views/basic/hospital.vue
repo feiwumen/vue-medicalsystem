@@ -411,7 +411,7 @@
       },
 
       emptyUpdateInfo(){
-        this.addInfo = {
+        this.updateInfo = {
           id: undefined,
           name:undefined,
           type:undefined,
