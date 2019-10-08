@@ -44,7 +44,8 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+// import { getList } from '@/api/table'
+import service from '@/utils/request'
 
 export default {
   filters: {
@@ -69,9 +70,17 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      /*getList().then(response => {
         this.list = response.data.items
         this.listLoading = false
+      })*/
+
+      service.get("/manage/poverty/list", ).then(response => {
+       /* this.listLoading = false
+        this.list = response.data
+        this.total = response.count*/
+        this.list = response.data.items
+        this.listLoading = false;
       })
     }
   }
