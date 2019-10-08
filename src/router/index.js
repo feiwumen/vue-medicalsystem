@@ -52,7 +52,7 @@ export const constantRoutes = [
       path: 'index',
       name: 'index',
       component: () => import('@/views/basic/agency'),
-      meta: { title: '控制台', icon: 'dashboard' }
+      meta: { title: '主页', icon: 'dashboard' }
     }]
   },
 

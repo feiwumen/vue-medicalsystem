@@ -18,7 +18,7 @@ export function getInfo(userId) {
 
 export function logout() {
   return request({
-    url: '/user/logout',
+    url: '/manager/logout',
     method: 'post'
   })
 }
