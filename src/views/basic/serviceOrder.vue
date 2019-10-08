@@ -44,7 +44,8 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+
+import service from '@/utils/request'
 
 export default {
   filters: {
@@ -69,9 +70,9 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      service.get("/manage/poverty/list", ).then(response => {
         this.list = response.data.items
-        this.listLoading = false
+        this.listLoading = false;
       })
     }
   }
