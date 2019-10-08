@@ -2,9 +2,8 @@
   <div class="app-container">
     <div class="filter-container" >
       <div class="left-box">
-        <el-input  placeholder="机构名称" class="filter-item" />
-
-        <el-select v-model="state" style="width: 130px;margin-right: 15px;" size="mini" placeholder="状态">
+        <el-input v-model="listQuery.name" placeholder="请输入查询内容" class="filter-item" />
+        <el-select v-model="listQuery.state" style="width: 130px;margin: 0 10px;"  placeholder="状态">
           <el-option
             v-for="item in status_optins"
             :key="item.id"
@@ -12,12 +11,10 @@
             :value="item.id">
           </el-option>
         </el-select>
-
-        <el-button v-waves class="filter-item" type="primary" icon="el-icon-search">查询</el-button>
+        <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="fetchData">查询</el-button>
       </div>
-      <el-button  class="filter-item" type="primary" icon="el-icon-edit">添加机构</el-button>
+      <el-button  class="filter-item" type="primary" icon="el-icon-edit">添加订单</el-button>
     </div>
-
 
     <el-table
       v-loading="listLoading"
@@ -26,36 +23,60 @@
       border
       fit
       highlight-current-row
+      style="margin-top: 10px;">
     >
-      <el-table-column align="center" label="ID" width="95">
+
+      <el-table-column label="序号" prop="id" sortable="custom" align="center" width="80">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+
+      <el-table-column label="老人" width="110" align="center">
         <template slot-scope="scope">
           {{ scope.row.title }}
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column label="老人账号" width="110" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.author }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+      <el-table-column label="服务人员" width="110" align="center">
         <template slot-scope="scope">
           {{ scope.row.pageviews }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
+      <el-table-column label="服务人员账号" width="120" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          {{ scope.row.pageviews }}
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      <el-table-column label="工单下发时间" width="120" align="center">
         <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
+          {{ scope.row.pageviews }}
+        </template>
+      </el-table-column>
+      <el-table-column label="订单发布状态" width="120" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.pageviews }}
+        </template>
+      </el-table-column>
+      <el-table-column label="帮扶时间" min-width="110" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.pageviews }}
+        </template>
+      </el-table-column>
+      <el-table-column label="工单下发人" width="120" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.pageviews }}
+        </template>
+      </el-table-column>
+
+      <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
+          <el-button type="primary" icon="el-icon-edit" circle @click="handleUpdate(scope.row)" />
+          <el-button type="danger" icon="el-icon-delete" circle @click="handleDelete(scope.row)" />
         </template>
       </el-table-column>
     </el-table>
@@ -64,9 +85,11 @@
 
 <script>
 // import { getList } from '@/api/table'
+import waves from '@/directive/waves'
 import service from '@/utils/request'
 
 export default {
+  directives: { waves },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -80,7 +103,17 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true
+      listLoading: true,
+      // 查询条件
+      listQuery: {
+        name: undefined,
+        state:undefined,
+        offset : 0,
+        page : 1,
+        pageSize : 10
+      },
+      status_optins: [{id: 0, name: '无接单'}, {id: 1, name: '进行中'}, {id: 2, name: '已完成'}, {id: 3, name: '已取消'}],
+
     }
   },
   created() {
@@ -89,12 +122,17 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-
-
       service.get("/manage/poverty/list", ).then(response => {
         this.list = response.data.items
         this.listLoading = false;
       })
+    },
+    // 更新
+    handleUpdate(row) {
+
+    },
+
+    updateAgency(){
     }
   }
 }
