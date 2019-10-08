@@ -34,7 +34,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="机构地址" width="120px"  align="center">
+      <el-table-column label="机构地址" min-width="120px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.address }}</span>
         </template>

@@ -57,85 +57,67 @@
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.pageSize" @pagination="getList" />
 
 <!--    添加子女-->
-    <div style="text-align: left">
-      <el-dialog
-        title="添加子女"
-        @close="emptyAddInfo"
-        :visible.sync="addDialogVisible"
-        width="50%">
-        <el-form :model="addInfo" :rules="rules" ref="addEmpForm">
-          <div style="text-align: left">
-            <el-row>
-              <el-col :span="10">
-                <div>
-                  <el-form-item label="姓名:" prop="name">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" placeholder="请输入真实姓名"></el-input>
-                  </el-form-item>
-                </div>
-              </el-col>
+    <el-dialog
+      title="添加子女"
+      @close="emptyAddInfo"
+      :visible.sync="addDialogVisible"
+      width="50%">
+      <el-form :model="addInfo" :rules="rules" ref="addEmpForm">
+        <el-row aria-colcount="3">
+          <el-col aria-colindex="0">
+            <el-form-item label="姓名:" prop="name">
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.name" placeholder="请输入姓名"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="性别:" prop="sex">
+              <el-select v-model="addInfo.sex"  placeholder="性别">
+                <el-option
+                  v-for="item in sex_options"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="2">
+            <el-form-item label="出生日期:" prop="birth">
+              <el-date-picker
+                v-model="addInfo.birth"
+                value-format="yyyyMMdd"
+                type="date"
+                placeholder="出生日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-            </el-row>
+        <el-row aria-colcount="2">
+          <el-col aria-colindex="0">
+            <el-form-item label="手机号:" prop="phone" >
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.phone"
+                        placeholder="请输入手机号"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col aria-colindex="1">
+            <el-form-item label="密码:" prop="pwd">
+              <el-input prefix-icon="el-icon-edit" v-model="addInfo.pwd"
+                        placeholder="请输入密码"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-            <el-row>
-              <el-col :span="10">
-                <div>
-                  <el-form-item label="手机号:" prop="phone" >
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.phone"
-                              placeholder="请输入手机号"></el-input>
-                  </el-form-item>
-                </div>
-              </el-col>
-
-              <el-col :span="10">
-                <div>
-                  <el-form-item label="密码:" prop="pwd">
-                    <el-input prefix-icon="el-icon-edit" v-model="addInfo.pwd"
-                              placeholder="请输入密码"></el-input>
-                  </el-form-item>
-                </div>
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col :span="10">
-                <div>
-                  <el-form-item label="性别:" prop="sex">
-                    <el-select v-model="addInfo.sex"  placeholder="性别">
-                      <el-option
-                        v-for="item in sex_options"
-                        :key="item.id"
-                        :label="item.name"
-                        :value="item.id">
-                      </el-option>
-                    </el-select>
-                  </el-form-item>
-                </div>
-              </el-col>
-
-              <el-col :span="10">
-                <div>
-                  <el-form-item label="出生日期:" prop="birth">
-                    <el-date-picker
-                      v-model="addInfo.birth"
-                      value-format="yyyyMMdd"
-                      type="date"
-                      placeholder="出生日期">
-                    </el-date-picker>
-                  </el-form-item>
-                </div>
-              </el-col>
-            </el-row>
-
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="addDialogVisible= false">取 消</el-button>
-              <el-button type="primary" @click="addChild('addEmpForm')">确 定</el-button>
-            </span>
-
+        <el-row>
+          <div style="margin: 0 auto">
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="addDialogVisible= false">取 消</el-button>
+                <el-button type="primary" @click="addChild('addEmpForm')">确 定</el-button>
+             </span>
           </div>
-        </el-form>
-
-      </el-dialog>
-    </div>
+        </el-row>
+      </el-form>
+    </el-dialog>
 
   </div>
 </template>

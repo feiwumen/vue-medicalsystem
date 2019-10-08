@@ -72,19 +72,31 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin: 0px 15px;
   }
+
   .el-form-item {
     display: flex;
     justify-content: flex-start;
     .el-form-item__label{
-      width: 100px;
+      width: 90px;
     }
     .el-form-item__content{
-      width: 200px;
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+      padding-right: 10px;
     }
   }
 
   .tab-container {
     margin: 15px;
   }
+
+  .content-overflow{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+
 </style>

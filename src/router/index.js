@@ -130,12 +130,12 @@ export const constantRoutes = [
     name: 'security',
     meta: { title: '安全', icon: 'example' },
     children: [
-      {
-        path: 'call',
-        name: 'call',
-        component: () => import('@/views/security/call'),
-        meta: { title: '呼叫中心', icon: 'table' }
-      },
+      // {
+      //   path: 'call',
+      //   name: 'call',
+      //   component: () => import('@/views/security/call'),
+      //   meta: { title: '呼叫中心', icon: 'table' }
+      // },
 
       {
         path: 'device',
@@ -151,12 +151,12 @@ export const constantRoutes = [
         meta: { title: '健康预警', icon: 'table' }
       },
 
-      {
-        path: 'event',
-        name: 'event',
-        component: () => import('@/views/security/event'),
-        meta: { title: '事件处理日志', icon: 'table' }
-      },
+      // {
+      //   path: 'event',
+      //   name: 'event',
+      //   component: () => import('@/views/security/event'),
+      //   meta: { title: '事件处理日志', icon: 'table' }
+      // },
 
       {
         path: 'complaint',
@@ -182,12 +182,12 @@ export const constantRoutes = [
         meta: { title: '关怀模版', icon: 'table' }
       },
 
-      {
+ /*     {
         path: 'notify',
         name: 'notify',
         component: () => import('@/views/system/notify'),
         meta: { title: '通知公告', icon: 'table' }
-      },
+      },*/
 
       {
         path: 'news',
@@ -196,19 +196,19 @@ export const constantRoutes = [
         meta: { title: '资讯文章', icon: 'table' }
       },
 
-      {
-        path: 'role',
-        name: 'role',
-        component: () => import('@/views/system/role'),
-        meta: { title: '角色管理', icon: 'table' }
-      },
-
-      {
-        path: 'systemArea',
-        name: 'systemArea',
-        component: () => import('@/views/system/systemArea'),
-        meta: { title: '区域管理', icon: 'table' }
-      }
+      // {
+      //   path: 'role',
+      //   name: 'role',
+      //   component: () => import('@/views/system/role'),
+      //   meta: { title: '角色管理', icon: 'table' }
+      // },
+      //
+      // {
+      //   path: 'systemArea',
+      //   name: 'systemArea',
+      //   component: () => import('@/views/system/systemArea'),
+      //   meta: { title: '区域管理', icon: 'table' }
+      // }
     ]
   },
 
